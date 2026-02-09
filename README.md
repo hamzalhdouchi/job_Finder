@@ -1,59 +1,41 @@
 # JobFinder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+A modern Job Board Application built with Angular 17+ (Standalone), NgRx, and Tailwind CSS.
 
-## Development server
+## 🚀 Technology Stack
+- **Frontend**: Angular 21 (Standalone Components)
+- **State Management**: NgRx (Store, Effects, Router-Store)
+- **Styling**: Tailwind CSS v3
+- **Routing**: Angular Router (Lazy Loading)
+- **Mock Backend**: JSON Server
 
-To start a local development server, run:
+## 🛠️ Installation & Setup
 
-```bash
-ng serve
-```
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+2. **Start Mock Backend**
+   ```bash
+   npm run server
+   ```
+   *Runs on http://localhost:3000*
 
-## Code scaffolding
+3. **Run Application**
+   ```bash
+   npm start
+   ```
+   *Runs on http://localhost:4200*
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 📂 Project Structure
+- `src/app/core`: Singleton services, guards (AuthGuard), interceptors (ErrorInterceptor).
+- `src/app/shared`: Reusable UI components.
+- `src/app/features`: Domain features (Auth, Jobs, Favorites, Applications, Profile).
+- `src/environments`: Environment configuration.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ✨ Features
+- **Job Search**: Browse and filter job offers.
+- **Favorites**: Save interesting jobs (using NgRx).
+- **Applications**: Track job application status.
+- **Authentication**: User role management (Candidate/Recruiter).

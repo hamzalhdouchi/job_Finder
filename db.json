@@ -1,0 +1,94 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "hamza.alhadouchi@example.com",
+      "password": "123456",
+      "firstName": "Hamza",
+      "lastName": "Alhadouchi",
+      "role": "APPLICANT"
+    },
+    {
+      "id": 2,
+      "email": "sara.benali@example.com",
+      "password": "password123",
+      "firstName": "Sara",
+      "lastName": "Benali",
+      "role": "RECRUITER"
+    },
+    {
+      "firstName": "Yvonne",
+      "lastName": "Barlow",
+      "email": "kypavow@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "role": "APPLICANT",
+      "id": 3
+    },
+    {
+      "firstName": "Summer",
+      "lastName": "Levine",
+      "email": "cyja@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "role": "RECRUITER",
+      "id": 4
+    }
+  ],
+  "favoritesOffers": [
+    {
+      "id": 1,
+      "userId": 1,
+      "offerId": "101",
+      "title": "Frontend Developer",
+      "company": "Tech Solutions",
+      "location": "Casablanca",
+      "savedAt": "2026-02-09T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "offerId": "102",
+      "title": "UX Designer",
+      "company": "Creative Agency",
+      "location": "Rabat",
+      "savedAt": "2026-02-08T14:30:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "offerId": "105",
+      "title": "Full Stack Engineer",
+      "company": "StartUp Hub",
+      "location": "Remote",
+      "savedAt": "2026-02-09T09:15:00Z"
+    }
+  ],
+  "applications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "offerId": "103",
+      "title": "Angular Specialist",
+      "company": "Bank IT",
+      "status": "PENDING",
+      "appliedAt": "2026-02-01T11:00:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "offerId": "104",
+      "title": "Junior Dev",
+      "company": "SoftCorp",
+      "status": "REJECTED",
+      "appliedAt": "2026-01-25T16:45:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "offerId": "101",
+      "title": "Frontend Developer",
+      "company": "Tech Solutions",
+      "status": "INTERVIEW",
+      "appliedAt": "2026-02-05T13:20:00Z"
+    }
+  ]
+}
