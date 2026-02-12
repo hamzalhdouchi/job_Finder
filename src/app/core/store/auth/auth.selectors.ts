@@ -10,7 +10,7 @@ export const selectUser = createSelector(
 
 export const selectIsAuthenticated = createSelector(
     selectAuthState,
-    (state: AuthState) => !!state.user
+    (state: AuthState) => state.isAuthenticated
 );
 
 export const selectAuthLoading = createSelector(
@@ -21,4 +21,14 @@ export const selectAuthLoading = createSelector(
 export const selectAuthError = createSelector(
     selectAuthState,
     (state: AuthState) => state.error
+);
+
+export const selectSuccessMessage = createSelector(
+    selectAuthState,
+    (state: AuthState) => state.successMessage
+);
+
+export const selectUserId = createSelector(
+    selectUser,
+    (user) => user?.id || null
 );
