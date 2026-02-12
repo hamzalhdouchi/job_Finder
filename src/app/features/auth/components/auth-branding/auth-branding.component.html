@@ -1,0 +1,55 @@
+<div class="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-green-800 to-green-900 p-12 flex-col justify-between min-h-screen">
+    <div>
+        <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-400 via-green-500 to-green-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/40">
+                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="4" y="9" width="9" height="7" rx="2" ry="2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                    <path d="M7 9V7a2 2 0 012-2h3a2 2 0 012 2v2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                    <circle cx="16.5" cy="13.5" r="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                    <line x1="18" y1="15" x2="20" y2="17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                </svg>
+            </div>
+            <span class="text-white text-2xl font-bold">JobFinder</span>
+        </div>
+    </div>
+
+    <div class="space-y-8">
+        <h1 class="text-4xl font-bold text-white leading-tight">
+            {{ title() }}<br/>
+            <span class="text-amber-400">{{ subtitle() }}</span>
+        </h1>
+        <p class="text-green-200 text-lg max-w-md">
+            {{ description() }}
+        </p>
+
+        @if (features().length > 0) {
+            <div class="space-y-4">
+                @for (feature of features(); track feature) {
+                    <div class="flex items-center space-x-3 text-green-200">
+                        <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <span>{{ feature }}</span>
+                    </div>
+                }
+            </div>
+        } @else {
+            <div class="flex items-center space-x-8 text-green-200">
+                @for (stat of stats(); track stat) {
+                    <div class="flex items-center space-x-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span>{{ stat }}</span>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="text-green-300 text-sm">
+        &copy; 2026 JobFinder. All rights reserved.
+    </div>
+</div>
