@@ -6,7 +6,7 @@
       "password": "123456",
       "firstName": "Hamza",
       "lastName": "Alhadouchi",
-      "role": "APPLICANT"
+      "createdAt": "2026-02-01T10:00:00Z"
     },
     {
       "id": 2,
@@ -14,23 +14,31 @@
       "password": "password123",
       "firstName": "Sara",
       "lastName": "Benali",
-      "role": "RECRUITER"
+      "createdAt": "2026-02-02T10:00:00Z"
     },
     {
-      "firstName": "Yvonne",
-      "lastName": "Barlow",
-      "email": "kypavow@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "role": "APPLICANT",
+      "firstName": "Leslie",
+      "lastName": "Hunter",
+      "email": "lukeroruki@mailinator.com",
+      "password": "UGEkJHcwcmQhX2pvYmZpbmRlcl9zYWx0XzIwMjY=",
+      "createdAt": "2026-02-12T14:07:00.943Z",
       "id": 3
     },
     {
-      "firstName": "Summer",
-      "lastName": "Levine",
-      "email": "cyja@mailinator.com",
-      "password": "Pa$$w0rd!",
-      "role": "RECRUITER",
+      "firstName": "Iola",
+      "lastName": "Dejesus",
+      "email": "hamzabnisss16@gmail.com",
+      "password": "UGEkJHcwcmQhX2pvYmZpbmRlcl9zYWx0XzIwMjY=",
+      "createdAt": "2026-02-12T16:00:53.765Z",
       "id": 4
+    },
+    {
+      "firstName": "Illana",
+      "lastName": "Park",
+      "email": "mazecet@mailinator.com",
+      "password": "UGEkJHcwcmQhX2pvYmZpbmRlcl9zYWx0XzIwMjY=",
+      "createdAt": "2026-02-12T22:07:04.003Z",
+      "id": 5
     }
   ],
   "favoritesOffers": [
@@ -53,13 +61,71 @@
       "savedAt": "2026-02-08T14:30:00Z"
     },
     {
-      "id": 3,
-      "userId": 1,
-      "offerId": "105",
-      "title": "Full Stack Engineer",
-      "company": "StartUp Hub",
-      "location": "Remote",
-      "savedAt": "2026-02-09T09:15:00Z"
+      "offerId": "5625223719",
+      "title": "Local CDL A Delivery Truck Driver",
+      "company": "Performance Foodservice",
+      "location": "Lanesville, Harrison County",
+      "salary": "£59k+",
+      "url": "https://www.adzuna.com/land/ad/5625223719?se=isSexxMI8RGqB8w4Zc_nOA&utm_medium=api&utm_source=8d4c6933&v=42EF0F80BEA818EADCA28FE46293A2B59853344B",
+      "userId": 3,
+      "savedAt": "2026-02-12T14:08:25.717Z",
+      "id": 4,
+      "notes": "meow"
+    },
+    {
+      "offerId": "5598137147",
+      "title": "Maintenance Tech 3 - 3rd Shift",
+      "company": "Aspire Bakeries",
+      "location": "Jim Thorpe, Carbon County",
+      "salary": "£88k+",
+      "url": "https://www.adzuna.com/land/ad/5598137147?se=1Gz3gB4I8RGGVM1vfz6P-A&utm_medium=api&utm_source=8d4c6933&v=05A9515CCA6AF4767DD65FA4913522DB8352D2BB",
+      "userId": 3,
+      "savedAt": "2026-02-12T15:23:59.743Z",
+      "id": 5
+    },
+    {
+      "offerId": "5626080204",
+      "title": "Family Medicine Physician",
+      "company": "PeaceHealth",
+      "location": "Santa Clara, Lane County",
+      "salary": "£102k+",
+      "url": "https://www.adzuna.com/details/5626080204?utm_medium=api&utm_source=8d4c6933",
+      "userId": 3,
+      "savedAt": "2026-02-12T15:24:08.801Z",
+      "id": 6
+    },
+    {
+      "offerId": "5626179915",
+      "title": "Physician / ObGyn / New Mexico / Permanent / Southwest New Mexico",
+      "company": "International Medical Placement, Ltd.",
+      "location": "New Mexico, US",
+      "salary": "£85k+",
+      "url": "https://www.adzuna.com/land/ad/5626179915?se=WClN6ywI8RG9RO-g7Uo5bg&utm_medium=api&utm_source=8d4c6933&v=550488B672D3A1A1690EBB3AA1FFE991B25026D1",
+      "userId": 4,
+      "savedAt": "2026-02-12T17:08:25.423Z",
+      "id": 7
+    },
+    {
+      "offerId": "5626179905",
+      "title": "Tour Guide - Ghost Tour",
+      "company": "US Ghost Adventures",
+      "location": "Elgin, Kane County",
+      "salary": "£83k - £125k",
+      "url": "https://www.adzuna.com/details/5626179905?utm_medium=api&utm_source=8d4c6933",
+      "userId": 4,
+      "savedAt": "2026-02-12T17:14:26.599Z",
+      "id": 8
+    },
+    {
+      "offerId": "5626721331",
+      "title": "Bilingual - Background Check Specialists_JOR",
+      "company": "National Youth Advocate Program",
+      "location": "Grandview Heights, Franklin County",
+      "salary": "£49k+",
+      "url": "https://www.adzuna.com/details/5626721331?utm_medium=api&utm_source=8d4c6933",
+      "userId": 5,
+      "savedAt": "2026-02-12T22:39:57.767Z",
+      "id": 9
     }
   ],
   "applications": [
@@ -67,28 +133,118 @@
       "id": 1,
       "userId": 1,
       "offerId": "103",
+      "apiSource": "adzuna",
       "title": "Angular Specialist",
       "company": "Bank IT",
-      "status": "PENDING",
-      "appliedAt": "2026-02-01T11:00:00Z"
+      "location": "Casablanca",
+      "url": "https://example.com/job/103",
+      "status": "en_attente",
+      "notes": "Candidature envoyée le 10/02/2026. Relancer dans 2 semaines.",
+      "dateAdded": "2026-02-01T11:00:00Z"
     },
     {
       "id": 2,
       "userId": 1,
       "offerId": "104",
+      "apiSource": "adzuna",
       "title": "Junior Dev",
       "company": "SoftCorp",
-      "status": "REJECTED",
-      "appliedAt": "2026-01-25T16:45:00Z"
+      "location": "Remote",
+      "url": "https://example.com/job/104",
+      "status": "refuse",
+      "notes": "",
+      "dateAdded": "2026-01-25T16:45:00Z"
     },
     {
       "id": 3,
       "userId": 1,
       "offerId": "101",
+      "apiSource": "adzuna",
       "title": "Frontend Developer",
       "company": "Tech Solutions",
-      "status": "INTERVIEW",
-      "appliedAt": "2026-02-05T13:20:00Z"
+      "location": "Casablanca",
+      "url": "https://example.com/job/101",
+      "status": "accepte",
+      "notes": "Entretien prévu le 15/02/2026",
+      "dateAdded": "2026-02-05T13:20:00Z"
+    },
+    {
+      "offerId": "5401098444",
+      "title": "Now Hiring for RN Nights! $6/hr shift differential for night RNS!",
+      "company": "Encompass Health Rehabilitation Hospital of Littleton",
+      "location": "Denver, Colorado",
+      "url": "https://www.adzuna.com/land/ad/5401098444?se=isSexxMI8RGqB8w4Zc_nOA&utm_medium=api&utm_source=8d4c6933&v=39878FD3E408052AE0AA58C38681B09100C7245C",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 3,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T14:07:53.638Z",
+      "id": 4
+    },
+    {
+      "offerId": "5625223719",
+      "title": "Local CDL A Delivery Truck Driver",
+      "company": "Performance Foodservice",
+      "location": "Lanesville, Harrison County",
+      "url": "https://www.adzuna.com/land/ad/5625223719?se=isSexxMI8RGqB8w4Zc_nOA&utm_medium=api&utm_source=8d4c6933&v=42EF0F80BEA818EADCA28FE46293A2B59853344B",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 3,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T14:08:03.189Z",
+      "id": 5
+    },
+    {
+      "offerId": "5626179915",
+      "title": "Physician / ObGyn / New Mexico / Permanent / Southwest New Mexico",
+      "company": "International Medical Placement, Ltd.",
+      "location": "New Mexico, US",
+      "url": "https://www.adzuna.com/land/ad/5626179915?se=WClN6ywI8RG9RO-g7Uo5bg&utm_medium=api&utm_source=8d4c6933&v=550488B672D3A1A1690EBB3AA1FFE991B25026D1",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 4,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T17:08:27.438Z",
+      "id": 6
+    },
+    {
+      "offerId": "5626179910",
+      "title": "Physician / Pediatrics / Virginia / Permanent / Western Virginia on NC border",
+      "company": "International Medical Placement, Ltd.",
+      "location": "Virginia, US",
+      "url": "https://www.adzuna.com/land/ad/5626179910?se=gjxApi0I8RGRq8rB1pz38Q&utm_medium=api&utm_source=8d4c6933&v=E73C3FC396F2E0C60A8BE8E9889342B8F8B6032E",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 4,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T17:12:25.811Z",
+      "id": 7
+    },
+    {
+      "offerId": "5626179905",
+      "title": "Tour Guide - Ghost Tour",
+      "company": "US Ghost Adventures",
+      "location": "Elgin, Kane County",
+      "url": "https://www.adzuna.com/details/5626179905?utm_medium=api&utm_source=8d4c6933",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 4,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T17:14:24.387Z",
+      "id": 8
+    },
+    {
+      "offerId": "5626721317",
+      "title": "Registered Nurse (RN), Float Critical Care / ICU",
+      "company": "Yale New Haven Health",
+      "location": "Ansonia, New Haven County",
+      "url": "https://www.adzuna.com/land/ad/5626721317?se=gpYhYFsI8RG64vwANfuj2A&utm_medium=api&utm_source=8d4c6933&v=7C3C56463AA276951C9F0B000B2073F8ED3658B8",
+      "apiSource": "adzuna",
+      "notes": "",
+      "userId": 5,
+      "status": "en_attente",
+      "dateAdded": "2026-02-12T22:39:45.908Z",
+      "id": 9
     }
   ]
 }
