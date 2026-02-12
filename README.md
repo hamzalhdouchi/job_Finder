@@ -2,11 +2,11 @@
 
 > A modern **Single Page Application** for searching, saving, and tracking job opportunities from international sources — built with **Angular 21** and **NgRx**.
 
-🅰️ Angular 21 · 🟣 NgRx 21 · 🎨 Tailwind CSS 3.4 · 🗄️ JSON Server · 📡 Adzuna API · 🔷 TypeScript 5.9
+ Angular 21 ·  NgRx 21 ·  Tailwind CSS 3.4 ·  JSON Server ·  Adzuna API ·  TypeScript 5.9
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Overview](#-overview)
 - [Features](#-features)
@@ -22,22 +22,22 @@
 
 ---
 
-## 📖 Overview
+##  Overview
 
 **JobFinder** allows job seekers to search thousands of international job offers through the **Adzuna API**, save favorites, and track their application statuses — all within a fully responsive, client-side application. Data is persisted via **JSON Server** simulating a REST backend.
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🔐 Authentication
+###  Authentication
 - User registration (first name, last name, email, password)
 - Login with email/password verification against JSON Server
 - Session management via `sessionStorage` (active for current browser session only)
 - Password hashing (base64 salted) for basic security
 - Protected routes with `AuthGuard`
 
-### 🔍 Job Search
+###  Job Search
 - Search by **keyword** (title-only matching via Adzuna `title_only` param)
 - Filter by **location**, **country** (13+ countries), **contract type**, **salary**, **category**
 - Results sorted by **publication date** (newest first)
@@ -45,27 +45,27 @@
 - Infinite scroll pagination (10 results per batch)
 - Direct link to original job posting on the source website
 
-### ⭐ Favorites Management (NgRx)
+###  Favorites Management (NgRx)
 - Add/remove jobs to personal favorites
 - Visual indicator when a job is already favorited
 - Duplicate prevention (server-side check before insert)
 - Dedicated favorites page
 - Full NgRx state management (actions → effects → reducer → selectors)
 
-### 📄 Application Tracking
+###  Application Tracking
 - Track job applications with statuses: **En attente** → **Accepté** / **Refusé**
 - Add personal notes to each application
 - Delete tracked applications
 - Dedicated applications page
 
-### 👤 Profile Management
+###  Profile Management
 - Edit personal information (first name, last name, email)
 - Change password with strength validation
 - Delete account with confirmation (type "DELETE" to confirm)
 
 ---
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
@@ -80,7 +80,7 @@
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -122,7 +122,7 @@ Component ◀──select──── Selector ◀── Reducer ◀── Actio
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 src/
@@ -177,7 +177,7 @@ src/
 
 ---
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -219,7 +219,7 @@ npm run build
 
 ---
 
-## 🌐 API Integration
+##  API Integration
 
 ### Adzuna API (Public Job Search)
 | Detail | Value |
@@ -239,7 +239,7 @@ npm run build
 
 ---
 
-## 🗃️ State Management (NgRx)
+##  State Management (NgRx)
 
 ### Registered Stores
 
@@ -260,11 +260,11 @@ npm run build
 - `selectAllFavorites` — array of saved offers
 - `selectIsFavorite(offerId)` — check if a specific job is favorited
 
-> 💡 **Redux DevTools** is enabled in development mode via `provideStoreDevtools()` — install the browser extension to inspect state changes.
+>  **Redux DevTools** is enabled in development mode via `provideStoreDevtools()` — install the browser extension to inspect state changes.
 
 ---
 
-## 🔐 Authentication
+##  Authentication
 
 ### Flow
 
@@ -293,7 +293,7 @@ npm run build
 
 ---
 
-## 🎯 Key Technical Highlights
+##  Key Technical Highlights
 
 | Concept | Implementation |
 |---------|---------------|
@@ -314,7 +314,7 @@ npm run build
 
 ---
 
-## 📜 Scripts
+##  Scripts
 
 | Command | Description |
 |---------|-------------|
@@ -325,10 +325,8 @@ npm run build
 
 ---
 
-## 👤 Author
+##  Author
 
 **Hamza Alhadouchi**
 
 ---
-
-*Built as part of the 2025/2026 cross-evaluation project.*
