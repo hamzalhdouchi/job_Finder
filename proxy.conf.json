@@ -1,0 +1,23 @@
+{
+  "/api/adzuna": {
+    "target": "https://api.adzuna.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/adzuna": "/v1/api/jobs"
+    },
+    "logLevel": "debug"
+  },
+  "/users": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/favoritesOffers": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/applications": {
+    "target": "http://localhost:3000",
+    "secure": false
+  }
+}
