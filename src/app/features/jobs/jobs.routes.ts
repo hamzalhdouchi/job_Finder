@@ -1,11 +1,9 @@
 import { Routes } from '@angular/router';
-import { JobsListComponent } from './job-list/job-list.component';
-import { authGuard } from '../../core/guards/auth.guard';
+import { JobSearchComponent } from './job-search/job-search.component';
 
 export const jobsRoutes: Routes = [
     {
         path: '',
-        component: JobsListComponent,
-        canActivate: [authGuard]
+        component: JobSearchComponent
     }
 ];
