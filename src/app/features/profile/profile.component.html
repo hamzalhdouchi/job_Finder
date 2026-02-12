@@ -1,61 +1,305 @@
-<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-        <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
-            <div>
-                <h3 class="text-lg leading-6 font-medium text-gray-900">User Profile</h3>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and account management.</p>
+<div class="min-h-screen bg-gray-50">
+    <div class="bg-gradient-to-r from-green-800 via-green-700 to-teal-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 bg-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        @if (user$ | async; as user) {
+                            <span class="text-3xl font-bold text-white">
+                                {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+                            </span>
+                        }
+                    </div>
+                    <div>
+                        @if (user$ | async; as user) {
+                            <h1 class="text-2xl font-bold text-white">{{ user.firstName }} {{ user.lastName }}</h1>
+                            <p class="text-green-200">{{ user.email }}</p>
+                        }
+                    </div>
+                </div>
+                <button 
+                    (click)="logout()"
+                    class="inline-flex items-center px-4 py-2 border border-white/30 text-sm font-medium rounded-xl text-white hover:bg-white/10 transition-colors">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Logout
+                </button>
             </div>
-            <button (click)="logout()"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700">
-                Logout
-            </button>
         </div>
+    </div>
 
-        <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
-            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="sm:divide-y sm:divide-gray-200">
-
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">First Name</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input formControlName="firstName"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                    </dd>
-                </div>
-
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Last Name</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input formControlName="lastName"
-                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                    </dd>
-                </div>
-
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Email request</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <input formControlName="email" readonly
-                            class="bg-gray-100 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
-                    </dd>
-                </div>
-
-                <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Role</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                        <span
-                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            {{ profileForm.get('role')?.value }}
-                        </span>
-                    </dd>
-                </div>
-
-                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-3">
-                    <button type="submit" [disabled]="profileForm.invalid || (loading$ | async)"
-                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50">
-                        Save Changes
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full lg:w-64 flex-shrink-0">
+                <nav class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <button 
+                        (click)="setTab('profile')"
+                        [class]="activeTab === 'profile' ? 'bg-green-50 text-green-700 border-l-4 border-green-700' : 'text-gray-700 hover:bg-gray-50'"
+                        class="w-full flex items-center space-x-3 px-4 py-4 text-left transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        <span class="font-medium">Personal Info</span>
                     </button>
-                </div>
+                    <button 
+                        (click)="setTab('security')"
+                        [class]="activeTab === 'security' ? 'bg-green-50 text-green-700 border-l-4 border-green-700' : 'text-gray-700 hover:bg-gray-50'"
+                        class="w-full flex items-center space-x-3 px-4 py-4 text-left transition-colors border-t border-gray-100">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                        <span class="font-medium">Security</span>
+                    </button>
+                    <button 
+                        (click)="setTab('danger')"
+                        [class]="activeTab === 'danger' ? 'bg-red-50 text-red-700 border-l-4 border-red-600' : 'text-gray-700 hover:bg-gray-50'"
+                        class="w-full flex items-center space-x-3 px-4 py-4 text-left transition-colors border-t border-gray-100">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <span class="font-medium">Danger Zone</span>
+                    </button>
+                </nav>
+            </div>
 
-            </form>
+            <div class="flex-1">
+                @if (successMessage$ | async; as successMessage) {
+                    <div class="mb-6 bg-green-50 border border-green-200 rounded-xl p-4 flex items-start space-x-3">
+                        <svg class="w-5 h-5 text-green-700 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-green-800">{{ successMessage }}</span>
+                    </div>
+                }
+
+                @if (error$ | async; as error) {
+                    <div class="mb-6 bg-red-50 border border-red-200 rounded-xl p-4 flex items-start space-x-3">
+                        <svg class="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-red-800">{{ error }}</span>
+                    </div>
+                }
+
+                @if (activeTab === 'profile') {
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h2 class="text-xl font-bold text-gray-900">Personal Information</h2>
+                            <p class="text-gray-600 text-sm mt-1">Update your personal details here</p>
+                        </div>
+
+                        <form [formGroup]="profileForm" (ngSubmit)="onProfileSubmit()" class="space-y-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                    <input 
+                                        id="firstName" 
+                                        type="text" 
+                                        formControlName="firstName"
+                                        class="block w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                        [class.border-red-500]="firstNameControl?.invalid && firstNameControl?.touched">
+                                    @if (firstNameControl?.invalid && firstNameControl?.touched) {
+                                        <p class="mt-1 text-xs text-red-600">First name is required</p>
+                                    }
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                    <input 
+                                        id="lastName" 
+                                        type="text" 
+                                        formControlName="lastName"
+                                        class="block w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                        [class.border-red-500]="lastNameControl?.invalid && lastNameControl?.touched">
+                                    @if (lastNameControl?.invalid && lastNameControl?.touched) {
+                                        <p class="mt-1 text-xs text-red-600">Last name is required</p>
+                                    }
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input 
+                                    id="email" 
+                                    type="email" 
+                                    formControlName="email"
+                                    class="block w-full px-4 py-3 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                    [class.border-red-500]="emailControl?.invalid && emailControl?.touched">
+                                @if (emailControl?.invalid && emailControl?.touched) {
+                                    <p class="mt-1 text-xs text-red-600">
+                                        @if (emailControl?.errors?.['required']) {
+                                            Email is required
+                                        } @else if (emailControl?.errors?.['email']) {
+                                            Please enter a valid email address
+                                        }
+                                    </p>
+                                }
+                            </div>
+
+                            <div class="flex justify-end pt-4">
+                                <button 
+                                    type="submit" 
+                                    [disabled]="loading$ | async"
+                                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 disabled:opacity-50 transition-colors">
+                                    @if (loading$ | async) {
+                                        <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                        </svg>
+                                        Saving...
+                                    } @else {
+                                        Save Changes
+                                    }
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                }
+
+                @if (activeTab === 'security') {
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h2 class="text-xl font-bold text-gray-900">Change Password</h2>
+                            <p class="text-gray-600 text-sm mt-1">Update your password to keep your account secure</p>
+                        </div>
+
+                        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordSubmit()" class="space-y-6">
+                            <div>
+                                <label for="currentPassword" class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                                <div class="relative">
+                                    <input 
+                                        id="currentPassword" 
+                                        [type]="showCurrentPassword ? 'text' : 'password'" 
+                                        formControlName="currentPassword"
+                                        class="block w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                        [class.border-red-500]="currentPasswordControl?.invalid && currentPasswordControl?.touched"
+                                        placeholder="Enter current password">
+                                    <button 
+                                        type="button" 
+                                        (click)="showCurrentPassword = !showCurrentPassword"
+                                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600">
+                                        @if (showCurrentPassword) {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                            </svg>
+                                        } @else {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        }
+                                    </button>
+                                </div>
+                                @if (currentPasswordControl?.invalid && currentPasswordControl?.touched) {
+                                    <p class="mt-1 text-xs text-red-600">Current password is required</p>
+                                }
+                            </div>
+
+                            <div>
+                                <label for="newPassword" class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                <div class="relative">
+                                    <input 
+                                        id="newPassword" 
+                                        [type]="showNewPassword ? 'text' : 'password'" 
+                                        formControlName="newPassword"
+                                        class="block w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                        [class.border-red-500]="newPasswordControl?.invalid && newPasswordControl?.touched"
+                                        placeholder="Enter new password">
+                                    <button 
+                                        type="button" 
+                                        (click)="showNewPassword = !showNewPassword"
+                                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600">
+                                        @if (showNewPassword) {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                            </svg>
+                                        } @else {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        }
+                                    </button>
+                                </div>
+                                
+                                @if (newPasswordControl?.value) {
+                                    <div class="mt-3 space-y-2">
+                                        <div class="flex items-center justify-between text-xs">
+                                            <span class="text-gray-600">Password strength:</span>
+                                            <span [class]="strengthPercentage >= 80 ? 'text-green-700' : strengthPercentage >= 60 ? 'text-lime-600' : strengthPercentage >= 40 ? 'text-yellow-600' : 'text-red-600'" class="font-medium">
+                                                {{ strengthLabel }}
+                                            </span>
+                                        </div>
+                                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div [class]="strengthColor" class="h-full transition-all duration-300" [style.width.%]="strengthPercentage"></div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+
+                            <div>
+                                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                                <div class="relative">
+                                    <input 
+                                        id="confirmPassword" 
+                                        [type]="showConfirmPassword ? 'text' : 'password'" 
+                                        formControlName="confirmPassword"
+                                        class="block w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-600 transition-colors"
+                                        [class.border-red-500]="confirmPasswordControl?.invalid && confirmPasswordControl?.touched"
+                                        placeholder="Confirm new password">
+                                    <button 
+                                        type="button" 
+                                        (click)="showConfirmPassword = !showConfirmPassword"
+                                        class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600">
+                                        @if (showConfirmPassword) {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                            </svg>
+                                        } @else {
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        }
+                                    </button>
+                                </div>
+                                @if (confirmPasswordControl?.invalid && confirmPasswordControl?.touched) {
+                                    <p class="mt-1 text-xs text-red-600">
+                                        @if (confirmPasswordControl?.errors?.['required']) {
+                                            Please confirm your password
+                                        } @else if (confirmPasswordControl?.errors?.['passwordMismatch']) {
+                                            Passwords do not match
+                                        }
+                                    </p>
+                                }
+                            </div>
+
+                            <div class="flex justify-end pt-4">
+                                <button 
+                                    type="submit" 
+                                    [disabled]="loading$ | async"
+                                    class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-600 disabled:opacity-50 transition-colors">
+                                    @if (loading$ | async) {
+                                        <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                                        </svg>
+                                        Updating...
+                                    } @else {
+                                        Update Password
+                                    }
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                }
+
+                @if (activeTab === 'danger') {
+                    <app-danger-zone 
+                        [loading]="!!(loading$ | async)"
+                        (deleteAccount)="onDeleteAccount()" />
+                }
+            </div>
         </div>
     </div>
 </div>
