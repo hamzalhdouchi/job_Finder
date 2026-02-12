@@ -1,1 +1,9 @@
-<router-outlet />
+@if (showHeader$ | async) {
+    <app-header />
+}
+<main>
+    <router-outlet />
+</main>
+@if (showHeader$ | async) {
+    <app-footer />
+}
