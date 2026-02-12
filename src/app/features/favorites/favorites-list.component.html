@@ -1,0 +1,78 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-green-800 via-green-700 to-teal-800 py-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white">My Favorites</h1>
+      </div>
+      <p class="text-green-200 ml-[52px]">Jobs you've saved for later</p>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 py-8">
+
+    <div *ngIf="loading$ | async" class="flex flex-col items-center justify-center py-20">
+      <div class="w-10 h-10 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
+      <p class="mt-4 text-gray-500">Loading your favorites...</p>
+    </div>
+
+    <div *ngIf="error$ | async as error" class="bg-red-50 border border-red-200 rounded-xl p-5 mb-6">
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <svg class="w-5 h-5 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+          </svg>
+          <p class="text-red-700 text-sm">{{ error }}</p>
+        </div>
+        <button (click)="dismissError()" class="p-1 text-red-400 hover:text-red-600 hover:bg-red-100 rounded-lg transition-colors shrink-0" title="Dismiss">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!(loading$ | async)">
+      <ng-container *ngIf="favorites$ | async as favorites">
+
+        <div *ngIf="favorites.length === 0" class="text-center py-20">
+          <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">No favorites yet</h3>
+          <p class="text-gray-500 mb-6 max-w-sm mx-auto">
+            Start saving jobs you're interested in and they'll appear here.
+          </p>
+          <button (click)="goToSearch()"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            Browse Jobs
+          </button>
+        </div>
+
+        <div *ngIf="favorites.length > 0">
+          <p class="text-sm text-gray-500 mb-4">
+            <span class="font-semibold text-green-600">{{ favorites.length }}</span> saved job{{ favorites.length > 1 ? 's' : '' }}
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <app-favorite-card
+              *ngFor="let fav of favorites; trackBy: trackById"
+              [favorite]="fav"
+              (remove)="onRemoveFavorite($event)"
+              (trackApplication)="onTrackApplication($event)"
+              (notesChange)="onNotesChange($event)" />
+          </div>
+        </div>
+
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
