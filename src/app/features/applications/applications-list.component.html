@@ -1,0 +1,107 @@
+<div class="min-h-screen bg-gray-50">
+  <div class="bg-gradient-to-r from-green-800 via-green-700 to-teal-800 py-12 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-white">My Applications</h1>
+      </div>
+      <p class="text-green-200 ml-[52px]">Track and manage your job applications</p>
+    </div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-6 py-8">
+
+    @if (successMessage()) {
+      <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-6 flex items-center gap-3">
+        <svg class="w-5 h-5 text-green-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+        </svg>
+        <p class="text-green-700 text-sm">{{ successMessage() }}</p>
+      </div>
+    }
+
+    @if (errorMessage()) {
+      <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 flex items-center gap-3">
+        <svg class="w-5 h-5 text-red-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+        </svg>
+        <p class="text-red-700 text-sm">{{ errorMessage() }}</p>
+      </div>
+    }
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <button (click)="setFilter('all')"
+              class="bg-white rounded-xl border-2 p-4 text-center transition-all"
+              [ngClass]="activeFilter() === 'all' ? 'border-green-500 shadow-md' : 'border-gray-200 hover:border-green-300'">
+        <p class="text-2xl font-bold text-gray-900">{{ stats().total }}</p>
+        <p class="text-xs text-gray-500 font-medium mt-1">Total</p>
+      </button>
+      <button (click)="setFilter('en_attente')"
+              class="bg-white rounded-xl border-2 p-4 text-center transition-all"
+              [ngClass]="activeFilter() === 'en_attente' ? 'border-amber-500 shadow-md' : 'border-gray-200 hover:border-amber-300'">
+        <p class="text-2xl font-bold text-amber-600">{{ stats().pending }}</p>
+        <p class="text-xs text-gray-500 font-medium mt-1">Pending</p>
+      </button>
+      <button (click)="setFilter('accepte')"
+              class="bg-white rounded-xl border-2 p-4 text-center transition-all"
+              [ngClass]="activeFilter() === 'accepte' ? 'border-green-500 shadow-md' : 'border-gray-200 hover:border-green-300'">
+        <p class="text-2xl font-bold text-green-600">{{ stats().accepted }}</p>
+        <p class="text-xs text-gray-500 font-medium mt-1">Accepted</p>
+      </button>
+      <button (click)="setFilter('refuse')"
+              class="bg-white rounded-xl border-2 p-4 text-center transition-all"
+              [ngClass]="activeFilter() === 'refuse' ? 'border-red-500 shadow-md' : 'border-gray-200 hover:border-red-300'">
+        <p class="text-2xl font-bold text-red-600">{{ stats().rejected }}</p>
+        <p class="text-xs text-gray-500 font-medium mt-1">Rejected</p>
+      </button>
+    </div>
+
+    @if (isLoading()) {
+      <div class="flex flex-col items-center justify-center py-20">
+        <div class="w-10 h-10 border-4 border-green-200 border-t-green-600 rounded-full animate-spin"></div>
+        <p class="mt-4 text-gray-500">Loading applications...</p>
+      </div>
+    }
+
+    @if (!isLoading()) {
+      @if (filteredApplications().length === 0 && applications().length === 0) {
+        <div class="text-center py-20">
+          <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-700 mb-2">No applications yet</h3>
+          <p class="text-gray-500 mb-6 max-w-sm mx-auto">
+            Start tracking your job applications to keep organized.
+          </p>
+          <button (click)="goToSearch()"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            Browse Jobs
+          </button>
+        </div>
+      } @else if (filteredApplications().length === 0) {
+        <div class="text-center py-16">
+          <p class="text-gray-500">No applications with this status</p>
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          @for (app of filteredApplications(); track app.id) {
+            <app-application-card
+              [application]="app"
+              (statusChange)="onStatusChange($event)"
+              (notesChange)="onNotesChange($event)"
+              (delete)="onDelete($event)" />
+          }
+        </div>
+      }
+    }
+  </div>
+</div>
