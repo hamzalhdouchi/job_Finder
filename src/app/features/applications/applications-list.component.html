@@ -92,8 +92,16 @@
           <p class="text-gray-500">No applications with this status</p>
         </div>
       } @else {
+        <div class="flex items-center justify-between mb-4">
+          <p class="text-sm text-gray-500">
+            <span class="font-semibold text-green-600">{{ filteredApplications().length }}</span> application{{ filteredApplications().length > 1 ? 's' : '' }}
+          </p>
+          @if (totalPages() > 1) {
+            <p class="text-sm text-gray-400">Page {{ currentPage() }} of {{ totalPages() }}</p>
+          }
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          @for (app of filteredApplications(); track app.id) {
+          @for (app of paginatedApplications(); track app.id) {
             <app-application-card
               [application]="app"
               (statusChange)="onStatusChange($event)"
@@ -101,6 +109,39 @@
               (delete)="onDelete($event)" />
           }
         </div>
+
+        <!-- Pagination -->
+        @if (totalPages() > 1) {
+          <div class="flex items-center justify-center gap-2 mt-8">
+            <button (click)="goToPage(currentPage() - 1)"
+                    [disabled]="currentPage() === 1"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    [ngClass]="currentPage() === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+
+            @for (page of pages(); track page) {
+              <button (click)="goToPage(page)"
+                      class="w-10 h-10 rounded-lg text-sm font-medium transition-colors"
+                      [ngClass]="page === currentPage()
+                        ? 'bg-green-600 text-white shadow-md'
+                        : 'text-gray-600 hover:bg-gray-100'">
+                {{ page }}
+              </button>
+            }
+
+            <button (click)="goToPage(currentPage() + 1)"
+                    [disabled]="currentPage() === totalPages()"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    [ngClass]="currentPage() === totalPages() ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        }
       }
     }
   </div>

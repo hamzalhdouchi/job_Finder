@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
@@ -22,8 +22,31 @@ export class FavoritesListComponent implements OnInit, OnDestroy {
   loading$: Observable<boolean> = this.store.select(selectFavoritesLoading);
   error$: Observable<string | null> = this.store.select(selectFavoritesError);
 
+  // Pagination
+  currentPage = signal(1);
+  itemsPerPage = 6;
+  allFavorites = signal<FavoriteOffer[]>([]);
+
+  totalPages = computed(() => Math.ceil(this.allFavorites().length / this.itemsPerPage) || 1);
+
+  paginatedFavorites = (() => {
+    const start = (this.currentPage() - 1) * this.itemsPerPage;
+    return this.allFavorites().slice(start, start + this.itemsPerPage);
+  });
+
+  pages = computed(() => {
+    const total = this.totalPages();
+    return Array.from({ length: total }, (_, i) => i + 1);
+  });
+
   ngOnInit(): void {
     this.store.dispatch(FavoritesActions.loadFavorites());
+    this.favorites$.subscribe(favs => {
+      this.allFavorites.set(favs);
+      if (this.currentPage() > this.totalPages()) {
+        this.currentPage.set(Math.max(1, this.totalPages()));
+      }
+    });
   }
 
   ngOnDestroy(): void {}
@@ -53,6 +76,13 @@ export class FavoritesListComponent implements OnInit, OnDestroy {
 
   goToSearch(): void {
     this.router.navigate(['/jobs']);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   trackById(index: number, fav: FavoriteOffer): number {

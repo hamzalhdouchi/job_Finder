@@ -188,6 +188,19 @@ export class JobSearchComponent implements OnInit, OnDestroy, AfterViewInit {
   onKeywordChange(_value: string): void {
   }
 
+  resetSearch(): void {
+    this.searchKeywords = '';
+    this.searchLocation = '';
+    this.allJobs.set([]);
+    this.totalResults.set(0);
+    this.currentPage = 1;
+    this.hasMorePages.set(true);
+    this.errorMessage.set('');
+    this.selectedJob.set(null);
+    this.toastMessage.set('');
+    this.onSearch();
+  }
+
   onSearch(): void {
     this.currentPage = 1;
     this.allJobs.set([]);

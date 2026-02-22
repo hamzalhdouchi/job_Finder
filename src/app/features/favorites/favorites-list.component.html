@@ -59,16 +59,51 @@
         </div>
 
         <div *ngIf="favorites.length > 0">
-          <p class="text-sm text-gray-500 mb-4">
-            <span class="font-semibold text-green-600">{{ favorites.length }}</span> saved job{{ favorites.length > 1 ? 's' : '' }}
-          </p>
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-sm text-gray-500">
+              <span class="font-semibold text-green-600">{{ favorites.length }}</span> saved job{{ favorites.length > 1 ? 's' : '' }}
+            </p>
+            <p class="text-sm text-gray-400" *ngIf="totalPages() > 1">
+              Page {{ currentPage() }} of {{ totalPages() }}
+            </p>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <app-favorite-card
-              *ngFor="let fav of favorites; trackBy: trackById"
+              *ngFor="let fav of paginatedFavorites(); trackBy: trackById"
               [favorite]="fav"
               (remove)="onRemoveFavorite($event)"
               (trackApplication)="onTrackApplication($event)"
               (notesChange)="onNotesChange($event)" />
+          </div>
+
+          <!-- Pagination -->
+          <div *ngIf="totalPages() > 1" class="flex items-center justify-center gap-2 mt-8">
+            <button (click)="goToPage(currentPage() - 1)"
+                    [disabled]="currentPage() === 1"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    [ngClass]="currentPage() === 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+
+            <button *ngFor="let page of pages()"
+                    (click)="goToPage(page)"
+                    class="w-10 h-10 rounded-lg text-sm font-medium transition-colors"
+                    [ngClass]="page === currentPage()
+                      ? 'bg-green-600 text-white shadow-md'
+                      : 'text-gray-600 hover:bg-gray-100'">
+              {{ page }}
+            </button>
+
+            <button (click)="goToPage(currentPage() + 1)"
+                    [disabled]="currentPage() === totalPages()"
+                    class="px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+                    [ngClass]="currentPage() === totalPages() ? 'text-gray-300 cursor-not-allowed' : 'text-gray-600 hover:bg-gray-100'">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
           </div>
         </div>
 

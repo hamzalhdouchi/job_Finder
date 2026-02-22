@@ -39,6 +39,14 @@
       "password": "UGEkJHcwcmQhX2pvYmZpbmRlcl9zYWx0XzIwMjY=",
       "createdAt": "2026-02-12T22:07:04.003Z",
       "id": 5
+    },
+    {
+      "firstName": "Pascale",
+      "lastName": "Mayo",
+      "email": "nocajoli@mailinator.com",
+      "password": "UGEkJHcwcmQhX2pvYmZpbmRlcl9zYWx0XzIwMjY=",
+      "createdAt": "2026-02-18T13:51:49.916Z",
+      "id": 6
     }
   ],
   "favoritesOffers": [
@@ -117,14 +125,14 @@
       "id": 8
     },
     {
-      "offerId": "5626721331",
-      "title": "Bilingual - Background Check Specialists_JOR",
-      "company": "National Youth Advocate Program",
-      "location": "Grandview Heights, Franklin County",
-      "salary": "£49k+",
-      "url": "https://www.adzuna.com/details/5626721331?utm_medium=api&utm_source=8d4c6933",
-      "userId": 5,
-      "savedAt": "2026-02-12T22:39:57.767Z",
+      "offerId": "5634578969",
+      "title": "Registered Dental Hygienist",
+      "company": "Confidential Dental Practice",
+      "location": "Troy, Oakland County",
+      "salary": "£153k+",
+      "url": "https://www.adzuna.com/land/ad/5634578969?se=nFt_f80M8RGuPNMqcecRoQ&utm_medium=api&utm_source=8d4c6933&v=379B4287B7A41EA37CBD955FCE4F7F0D9B4AFB77",
+      "userId": 6,
+      "savedAt": "2026-02-18T14:26:34.262Z",
       "id": 9
     }
   ],
@@ -234,16 +242,16 @@
       "id": 8
     },
     {
-      "offerId": "5626721317",
-      "title": "Registered Nurse (RN), Float Critical Care / ICU",
-      "company": "Yale New Haven Health",
-      "location": "Ansonia, New Haven County",
-      "url": "https://www.adzuna.com/land/ad/5626721317?se=gpYhYFsI8RG64vwANfuj2A&utm_medium=api&utm_source=8d4c6933&v=7C3C56463AA276951C9F0B000B2073F8ED3658B8",
+      "offerId": "5634578969",
+      "title": "Registered Dental Hygienist",
+      "company": "Confidential Dental Practice",
+      "location": "Troy, Oakland County",
+      "url": "https://www.adzuna.com/land/ad/5634578969?se=nFt_f80M8RGuPNMqcecRoQ&utm_medium=api&utm_source=8d4c6933&v=379B4287B7A41EA37CBD955FCE4F7F0D9B4AFB77",
       "apiSource": "adzuna",
-      "notes": "",
-      "userId": 5,
+      "notes": "hi how are you",
+      "userId": 6,
       "status": "en_attente",
-      "dateAdded": "2026-02-12T22:39:45.908Z",
+      "dateAdded": "2026-02-18T14:26:35.150Z",
       "id": 9
     }
   ]

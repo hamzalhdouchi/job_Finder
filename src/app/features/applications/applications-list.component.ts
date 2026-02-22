@@ -24,11 +24,27 @@ export class ApplicationsListComponent implements OnInit, OnDestroy {
   successMessage = signal('');
   activeFilter = signal<'all' | 'en_attente' | 'accepte' | 'refuse'>('all');
 
+  // Pagination
+  currentPage = signal(1);
+  itemsPerPage = 6;
+
   filteredApplications = computed(() => {
     const filter = this.activeFilter();
     const apps = this.applications();
     if (filter === 'all') return apps;
     return apps.filter(a => a.status === filter);
+  });
+
+  totalPages = computed(() => Math.ceil(this.filteredApplications().length / this.itemsPerPage) || 1);
+
+  paginatedApplications = computed(() => {
+    const start = (this.currentPage() - 1) * this.itemsPerPage;
+    return this.filteredApplications().slice(start, start + this.itemsPerPage);
+  });
+
+  pages = computed(() => {
+    const total = this.totalPages();
+    return Array.from({ length: total }, (_, i) => i + 1);
   });
 
   stats = computed(() => {
@@ -135,6 +151,14 @@ export class ApplicationsListComponent implements OnInit, OnDestroy {
 
   setFilter(filter: 'all' | 'en_attente' | 'accepte' | 'refuse'): void {
     this.activeFilter.set(filter);
+    this.currentPage.set(1);
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages()) {
+      this.currentPage.set(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   goToSearch(): void {
